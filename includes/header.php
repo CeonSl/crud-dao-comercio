@@ -1,5 +1,7 @@
+<?= include "php/config.php" ?> 
 <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top" style="padding: 20px 20px; position: sticky; background-color: #eee; margin-bottom: 100px;">
-    <a class="navbar-brand font-weight-bold" href="#">Valentine's</a>
+
+    <a class="navbar-brand font-weight-bold" href="<?= SERVERURL ?>index">Valentine's</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

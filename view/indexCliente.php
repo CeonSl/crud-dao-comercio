@@ -1,7 +1,6 @@
 <?php
 include_once("model/cliente/entidad/Cliente.php");
 include_once("model/cliente/dao/DaoCliente.php");
-include_once("php/config.php");
 ?>
 
 <!DOCTYPE html>

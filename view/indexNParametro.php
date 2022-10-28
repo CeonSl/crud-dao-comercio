@@ -1,6 +1,3 @@
-<?php
-include "php/config.php";
-?>
 <html lang="en">
 
 <head>
