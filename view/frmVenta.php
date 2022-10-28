@@ -61,7 +61,7 @@ $rutas = explode("/", ($_GET['cmd']));
 
           <div class="form-group">
             <label for="txtFecha">Fecha: </label>
-            <input type="text" id="txtFecha" name="txtFecha" value="<?= $rst->fecha ?>" class="form-control" placeholder="Ingrese Fecha">
+            <input type="date" id="txtFecha" name="txtFecha" value="<?= $rst->fecha ?>" class="form-control" placeholder="Ingrese Fecha">
           </div>
 
           <div class="form-group">
@@ -98,7 +98,7 @@ $rutas = explode("/", ($_GET['cmd']));
 
           <div class="form-group">
             <label for="txtFecha">Fecha: </label>
-            <input type="text" id="txtFecha" name="txtFecha" value="" class="form-control" placeholder="Ingrese Fecha">
+            <input type="date" id="txtFecha" name="txtFecha" value="" class="form-control" placeholder="Ingrese Fecha">
           </div>
 
           <div class="form-group">

@@ -43,7 +43,7 @@ class UsuarioController
     public function editar()
     {
         $rutas = explode("/", $_GET["cmd"]);
-        if (isset($rutas[2]) && isset($_POST["txtNombres"])) {
+        if (isset($rutas[2]) && isset($_POST["txtEstado"])) {
             $id = $rutas[2];
             $usuario = new Usuario();
             $usuario->setIdusuario($id);
