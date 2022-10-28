@@ -1,4 +1,4 @@
-<?= include "php/config.php" ?> 
+<?php include "php/config.php" ?> 
 <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top" style="padding: 20px 20px; position: sticky; background-color: #eee; margin-bottom: 100px;">
 
     <a class="navbar-brand font-weight-bold" href="<?= SERVERURL ?>index">Valentine's</a>
