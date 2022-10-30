@@ -40,13 +40,13 @@
 
       ?>
         <tr>
-          <td><?= $value->idnparametro ?></td>
+          <td><?= $value->id ?></td>
           <td><?= $value->descripcion ?></td>
           <td><?= $value->tipo ?></td>
           <td><?= $value->estado ?></td>
           <td>
-            <a href="<?php echo SERVERURL ?>editar/nParametro/<?= $value->idnparametro ?>" class="btn btn-primary">Editar </a>
-            <a href="<?php echo SERVERURL ?>eliminar/nParametro/<?= $value->idnparametro ?>" class="btn btn-danger">Eliminar </a>
+            <a href="<?php echo SERVERURL ?>editar/nParametro/<?= $value->id ?>" class="btn btn-primary">Editar </a>
+            <a href="<?php echo SERVERURL ?>eliminar/nParametro/<?= $value->id ?>" class="btn btn-danger">Eliminar </a>
           </td>
         </tr>
       <?php

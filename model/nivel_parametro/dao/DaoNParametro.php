@@ -13,14 +13,14 @@ class DaoNParametro
   {
     if ($idnparametro > 0) {
       // Un solo registro
-      $sql = "SELECT * FROM nparametro WHERE idnparametro=?";
+      $sql = "SELECT * FROM nivel_parametro WHERE id=?";
       $tabla = $this->base->prepare($sql);
       $tabla->bindParam(1, $idnparametro);
       $tabla->execute();
       $resultado = $tabla->fetch(PDO::FETCH_OBJ);
     } else {
       // Varios registros
-      $sql = "SELECT * FROM nparametro ORDER BY 2,3 ";
+      $sql = "SELECT * FROM nivel_parametro ORDER BY 2,3 ";
       $tabla = $this->base->query($sql);
       $tabla->execute();
       $resultado = $tabla->fetchAll(PDO::FETCH_OBJ);
@@ -30,7 +30,7 @@ class DaoNParametro
 
   public function Insert($nparametro)
   {
-    $sql = "INSERT INTO nparametro (descripcion, tipo, estado) VALUES (?,?,?)";
+    $sql = "INSERT INTO nivel_parametro (descripcion, tipo, estado) VALUES (?,?,?)";
     $tabla = $this->base->prepare($sql);
     $tabla->bindValue(1, $nparametro->getDescripcion());
     $tabla->bindValue(2, $nparametro->getTipo());
@@ -40,7 +40,7 @@ class DaoNParametro
 
   public function Update($nparametro)
   {
-    $sql = "UPDATE nparametro SET descripcion=?, tipo=?, estado=? WHERE idnparametro=?";
+    $sql = "UPDATE nivel_parametro SET descripcion=?, tipo=?, estado=? WHERE id=?";
     $tabla = $this->base->prepare($sql);
     $tabla->bindValue(1, $nparametro->getDescripcion());
     $tabla->bindValue(2, $nparametro->getTipo());
@@ -51,7 +51,7 @@ class DaoNParametro
 
   public function Delete($idnparametro = 0)
   {
-    $sql = "DELETE FROM nparametro WHERE idnparametro=?;";
+    $sql = "DELETE FROM nivel_parametro WHERE id=?;";
     $tabla = $this->base->prepare($sql);
     $tabla->bindValue(1, $idnparametro);
     $tabla->execute();
