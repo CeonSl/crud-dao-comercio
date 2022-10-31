@@ -10,6 +10,7 @@ class Cliente
   private $telefono;
   private $correo;
   private $estado;
+  private $genero;
 
   // Getters and Setters
 
@@ -81,5 +82,15 @@ class Cliente
   public function setEstado($estado)
   {
     $this->estado = $estado;
+  }
+
+  public function getGenero()
+  {
+    return $this->genero;
+  }
+
+  public function setGenero($genero)
+  {
+    $this->genero = $genero;
   }
 }

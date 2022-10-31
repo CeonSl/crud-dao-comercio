@@ -38,6 +38,7 @@ include_once("model/cliente/dao/DaoCliente.php");
         <th>Id</th>
         <th>Nombres</th>
         <th>Apellidos</th>
+        <th>Género</th>
         <th>Direccion</th>
         <th>Telefono</th>
         <th>Correo</th>
@@ -49,16 +50,17 @@ include_once("model/cliente/dao/DaoCliente.php");
 
       ?>
         <tr>
-          <td><?= $value->idcliente ?></td>
+          <td><?= $value->id ?></td>
           <td><?= $value->nombres ?></td>
           <td><?= $value->apellidos ?></td>
+          <td><?= $value->descripcion?></td>
           <td><?= $value->direccion ?></td>
           <td><?= $value->telefono ?></td>
           <td><?= $value->correo ?></td>
           <td><?= $value->estado ?></td>
           <td>
-            <a href="<?php echo SERVERURL ?>editar/cliente/<?= $value->idcliente ?>" class="btn btn-primary">Editar </a>
-            <a href="<?php echo SERVERURL ?>eliminar/cliente/<?= $value->idcliente ?>" class="btn btn-danger">Eliminar </a>
+            <a href="<?php echo SERVERURL ?>editar/cliente/<?= $value->id ?>" class="btn btn-primary">Editar </a>
+            <a href="<?php echo SERVERURL ?>eliminar/cliente/<?= $value->id ?>" class="btn btn-danger">Eliminar </a>
           </td>
         </tr>
       <?php

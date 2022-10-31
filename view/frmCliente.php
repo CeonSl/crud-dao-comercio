@@ -6,19 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulario de registro clientes</title>
-
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
-  <!-- jQuery library -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-
-  <!-- Popper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Latest compiled JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="includes/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <?php
@@ -26,7 +18,7 @@ $rutas = array();
 $rutas = explode("/", ($_GET['cmd']));
 ?>
 
-<body class="bg-dark" >
+<body class="bg-dark">
   <div class="jumbotron bg-dark col-lg-6 col-md-6 col-sm-6 float-md-center" style="margin: 20px; color: #fff;">
     <h1>Formulario de registro clientes</h1>
     <form <?php if (!isset($rutas[2])) { ?>action="<?php echo SERVERURL ?>registrar/cliente" <?php } else { ?>action="<?php echo SERVERURL ?>editar/cliente/<?= $rutas[2] ?>" <?php } ?>method="post">
@@ -46,6 +38,18 @@ $rutas = explode("/", ($_GET['cmd']));
           <div class="form-group">
             <label for="txtApellidos">Apellido: </label>
             <input type="text" id="txtApellidos" name="txtApellidos" value="<?= $rst->apellidos ?>" class="form-control" placeholder="Ingrese Apellidos">
+          </div>
+
+          <div class="form-group">
+            <label for="txtGenero">Género: </label>
+            <select class="form-select" id="txtGenero" name="txtGenero">
+              <?php  foreach ($rstGenero as $key => $value) {
+                if(($rst->descripcion) == ($value->descripcion)){?>
+              <option selected><?=$value -> descripcion?></option>
+              <?php }else{?>
+              <option ><?=$value -> descripcion?></option>
+              <?php }}?>
+            </select>
           </div>
 
           <div class="form-group">
@@ -71,13 +75,23 @@ $rutas = explode("/", ($_GET['cmd']));
         } else {
         ?>
           <div class="form-group">
-            <label for="txtNombres">Nombre: </label>
+            <label for="txtNombres">Nombres: </label>
             <input type="text" id="txtNombres" name="txtNombres" value="" class="form-control" placeholder="Ingrese Nombres">
           </div>
 
           <div class="form-group">
-            <label for="txtApellidos">Apellido: </label>
+            <label for="txtApellidos">Apellidos: </label>
             <input type="text" id="txtApellidos" name="txtApellidos" value="" class="form-control" placeholder="Ingrese Apellidos">
+          </div>
+
+
+          <div class="form-group">
+            <label for="txtGenero">Género: </label>
+            <select class="form-select" id="txtGenero" name="txtGenero">
+              <?php  foreach ($rst as $key => $value) {?>
+              <option><?=$value -> descripcion?></option>
+              <?php }?>
+            </select>
           </div>
 
           <div class="form-group">
