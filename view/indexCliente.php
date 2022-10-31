@@ -4,14 +4,14 @@ include_once("model/cliente/dao/DaoCliente.php");
 ?>
 <body class="bg-dark">
 
-  <div class="jumbotron bg-dark col-lg-4 col-md-4 col-sm-4 float-md-center" style="margin: 20px;">
+  <div class="jumbotron bg-dark col-lg-7 col-md-7 col-sm-7 float-md-center" style="margin: 20px;">
     <h1 style="color: #fff;">Listado de Clientes</h1>
 
     <p>
       <a href="<?php echo SERVERURL ?>registrar/cliente" class="btn btn-warning">Nuevo</a>
     </p>
 
-    <table style="width:1200px ;" class="table table-hover rounded-bottom table-light">
+    <table style="width:100% ;" class="table table-hover rounded-bottom table-light">
       <tr>
         <th>Id</th>
         <th>Nombres</th>

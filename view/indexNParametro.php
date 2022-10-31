@@ -1,12 +1,11 @@
 <body class="bg-dark">
 
-  <div class="jumbotron bg-dark col-lg-4 col-md-4 col-sm-4 float-md-center" style="margin: 20px; color: #fff;">
+  <div class="jumbotron bg-dark col-lg-6 col-md-6 col-sm-6 float-md-center" style="margin: 20px; color: #fff;">
     <h1>Listado de nivel de parametro</h1>
 
     <p>
       <a href="<?php echo SERVERURL ?>registrar/nParametro" class="btn btn-warning">Nuevo</a>
     </p>
-
     <table style="width:100% ;" class="table table-hover rounded-bottom table-light">
       <tr>
         <th>Id</th>
