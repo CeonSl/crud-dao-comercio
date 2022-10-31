@@ -20,7 +20,7 @@ class DaoNParametro
       $resultado = $tabla->fetch(PDO::FETCH_OBJ);
     } else {
       // Varios registros
-      $sql = "SELECT * FROM nivel_parametro ORDER BY 2,3 ";
+      $sql = "SELECT * FROM nivel_parametro ORDER BY id";
       $tabla = $this->base->query($sql);
       $tabla->execute();
       $resultado = $tabla->fetchAll(PDO::FETCH_OBJ);

@@ -16,7 +16,7 @@ class DaoCliente
       $sql = "SELECT c.id, nombres, apellidos, np.descripcion, direccion, telefono, correo, c.estado FROM cliente c
       JOIN persona p ON c.idPersona = p.id
       JOIN nivel_parametro np ON p.idGenero = np.id
-      WHERE c.id=?, c.estado='Activo';";
+      WHERE c.id=?;";
       $tabla = $this->base->prepare($sql);
       $tabla->bindParam(1, $cliente);
       $tabla->execute();
