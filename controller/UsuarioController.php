@@ -2,6 +2,7 @@
 
 require_once("model/usuario/entidad/Usuario.php");
 require_once("model/usuario/dao/DaoUsuario.php");
+require_once("model/cliente/dao/DaoCliente.php");
 
 class UsuarioController
 {
@@ -13,17 +14,37 @@ class UsuarioController
     public function registrar()
     {
 
-        if (isset($_POST["txtCorreo"])) {
+        if (isset($_POST["txtNombres"])) {
             $usuario = new Usuario();
-            $usuario->setContraseña($_POST["txtContraseña"]);
+            $daoCliente = new DaoCliente();
+            $daoUsuario = new DaoUsuario();
+
+            $usuario->setNombres($_POST["txtNombres"]);
+            $usuario->setApellidos($_POST["txtApellidos"]);
+
+            $rst = $daoCliente->FindIdGenre($_POST["txtGenero"]);
+
+            $usuario->setGenero($rst->id);
+            $usuario->setDireccion($_POST["txtDireccion"]);
+            $usuario->setTelefono($_POST["txtTelefono"]);
             $usuario->setCorreo($_POST["txtCorreo"]);
-            $usuario->setFechacreacion($_POST["txtFechacreacion"]);
+            $usuario->setUsuario($_POST["txtUsuario"]);
+            $usuario->setPassw($_POST["txtContraseña"]);
+            $usuario->setFechaCreacion($_POST["txtFechaCreacion"]);
+
+            $rstTipo = $daoUsuario->FindIdType($_POST["txtTipoUsuario"]);
+            
+            $usuario->setTipoUsuario($rstTipo->id);
             $usuario->setEstado($_POST["txtEstado"]);
 
-            $daoUsuario = new DaoUsuario();
+            
             $daoUsuario->Insert($usuario);
             $this->inicio();
         } else {
+            $daoCliente = new DaoCliente();
+            $rstG = $daoCliente->FillGenre();
+            $daoUsuario = new DaoUsuario();
+            $rstTipoU = $daoUsuario->FillType();
             require("view/frmUsuario.php");
         }
     }
@@ -40,27 +61,28 @@ class UsuarioController
         }
     }
 
-    public function editar()
-    {
-        $rutas = explode("/", $_GET["cmd"]);
-        if (isset($rutas[2]) && isset($_POST["txtNombres"])) {
-            $id = $rutas[2];
-            $usuario = new Usuario();
-            $usuario->setIdusuario($id);
-            $usuario->setContraseña($_POST["txtContraseña"]);
-            $usuario->setCorreo($_POST["txtCorreo"]);
-            $usuario->setFechacreacion($_POST["txtFechacreacion"]);
-            $usuario->setEstado($_POST["txtEstado"]);
+    // public function editar()
+    // {
+    //     $rutas = explode("/", $_GET["cmd"]);
+    //     if (isset($rutas[2]) && isset($_POST["txtNombres"])) {
+    //         $id = $rutas[2];
+    //         $usuario = new Usuario();
+    //         $usuario->setIdusuario($id);
+    //         $usuario->setContraseña($_POST["txtContraseña"]);
+    //         $usuario->setCorreo($_POST["txtCorreo"]);
+    //         $usuario->setFechacreacion($_POST["txtFechacreacion"]);
+    //         $usuario->setEstado($_POST["txtEstado"]);
 
-            $daoUsuario = new DaoUsuario();
-            $daoUsuario->Update($usuario);
-            $this->inicio();
-        } else {
-            $daoU = new DaoUsuario();
-            $rst = $daoU->Select($rutas[2]);
-            require("view/frmUsuario.php");
-        }
-    }
+    //         $daoUsuario = new DaoUsuario();
+    //         $daoUsuario->Update($usuario);
+    //         $this->inicio();
+    //     } else {
+    //         $daoU = new DaoUsuario();
+    //         $rst = $daoU->Select($rutas[2]);
+    //         require("view/frmUsuario.php");
+    //     }
+    // }
+
 
     public function index()
     {

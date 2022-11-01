@@ -26,7 +26,6 @@ class DaoCliente
       $sql = "SELECT c.id, nombres, apellidos, np.descripcion, direccion, telefono, correo, c.estado FROM cliente c
       JOIN persona p ON c.idPersona = p.id
       JOIN nivel_parametro np ON p.idGenero = np.id
-      WHERE c.estado = 'Activo'
       ORDER BY c.id;";
       $tabla = $this->base->query($sql);
       $tabla->execute();
