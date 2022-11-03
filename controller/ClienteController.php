@@ -2,6 +2,7 @@
 
 require_once("model/cliente/entidad/Cliente.php");
 require_once("model/cliente/dao/DaoCliente.php");
+require_once("model/genero/DaoGenero.php");
 
 class ClienteController
 {
@@ -14,7 +15,7 @@ class ClienteController
     {
 
         if (isset($_POST["txtNombres"])) {
-            $daoCliente = new DaoCliente();
+            
             $cliente = new Cliente();
             $cliente->setNombres($_POST["txtNombres"]);
             $cliente->setApellidos($_POST["txtApellidos"]);
@@ -22,14 +23,17 @@ class ClienteController
             $cliente->setTelefono($_POST["txtTelefono"]);
             $cliente->setCorreo($_POST["txtCorreo"]);
             $cliente->setEstado($_POST["txtEstado"]);
-            $rst = $daoCliente->FindIdGenre($_POST["txtGenero"]);
+
+            $daoGenero = new DaoGenero();
+            $rst = $daoGenero->FindIdGenre($_POST["txtGenero"]);
             $cliente->setGenero($rst->id);
 
+            $daoCliente = new DaoCliente();
             $daoCliente->Insert($cliente);
             $this->inicio();
         } else {
-            $daoCliente = new DaoCliente();
-            $rst = $daoCliente->FillGenre();
+            $daoGenero = new DaoGenero();
+            $rst = $daoGenero->FillGenre("Genero");
             require("view/frmCliente.php");
         }
     }
@@ -52,23 +56,29 @@ class ClienteController
         if (isset($rutas[2]) && isset($_POST["txtNombres"])) {
             $id = $rutas[2];
             $cliente = new Cliente();
-            $daoCliente = new DaoCliente();
+            
             $cliente->setNombres($_POST["txtNombres"]);
             $cliente->setApellidos($_POST["txtApellidos"]);
             $cliente->setDireccion($_POST["txtDireccion"]);
             $cliente->setTelefono($_POST["txtTelefono"]);
             $cliente->setCorreo($_POST["txtCorreo"]);
             $cliente->setEstado($_POST["txtEstado"]);
-            $rst = $daoCliente->FindIdGenre($_POST["txtGenero"]);
+
+            $daoGenero = new DaoGenero();
+            $rst = $daoGenero->FindIdGenre($_POST["txtGenero"]);
             $cliente->setGenero($rst->id);
+
             $cliente->setIdcliente($id);
 
+            $daoCliente = new DaoCliente();
             $daoCliente->Update($cliente);
             $this->inicio();
         } else {
             $daoC = new DaoCliente();
             $rst = $daoC->Select($rutas[2]);
-            $rstGenero = $daoC->FillGenre();
+
+            $daoGenero = new DaoGenero();
+            $rstGenero = $daoGenero->FillGenre("Genero");
             require("view/frmCliente.php");
         }
     }
