@@ -59,27 +59,44 @@ class UsuarioController
         }
     }
 
-    // public function editar()
-    // {
-    //     $rutas = explode("/", $_GET["cmd"]);
-    //     if (isset($rutas[2]) && isset($_POST["txtNombres"])) {
-    //         $id = $rutas[2];
-    //         $usuario = new Usuario();
-    //         $usuario->setIdusuario($id);
-    //         $usuario->setContraseña($_POST["txtContraseña"]);
-    //         $usuario->setCorreo($_POST["txtCorreo"]);
-    //         $usuario->setFechacreacion($_POST["txtFechacreacion"]);
-    //         $usuario->setEstado($_POST["txtEstado"]);
+    public function editar()
+    {
+        $daoNivelParametro = new DaoNParametro();
+        $rutas = explode("/", $_GET["cmd"]);
+        if (isset($rutas[2]) && isset($_POST["txtNombres"])) {
+            $id = $rutas[2];
+            $usuario = new Usuario();
 
-    //         $daoUsuario = new DaoUsuario();
-    //         $daoUsuario->Update($usuario);
-    //         $this->inicio();
-    //     } else {
-    //         $daoU = new DaoUsuario();
-    //         $rst = $daoU->Select($rutas[2]);
-    //         require("view/frmUsuario.php");
-    //     }
-    // }
+            $usuario->setNombres($_POST["txtNombres"]);
+            $usuario->setApellidos($_POST["txtApellidos"]);
+
+            $rst = $daoNivelParametro->FindIdComboBox($_POST["txtGenero"]);
+            $usuario->setGenero($rst->id);
+
+            $usuario->setDireccion($_POST["txtDireccion"]);
+            $usuario->setTelefono($_POST["txtTelefono"]);
+            $usuario->setCorreo($_POST["txtCorreo"]);
+            $usuario->setUsuario($_POST["txtUsuario"]);
+            $usuario->setPassw($_POST["txtContraseña"]);
+            $usuario->setFechaCreacion($_POST["txtFechaCreacion"]);
+
+            $rstTipo = $daoNivelParametro->FindIdType($_POST["txtTipoUsuario"]);
+            $usuario->setTipoUsuario($rstTipo->id);
+
+            $usuario->setEstado($_POST["txtEstado"]);
+
+            $daoUsuario = new DaoUsuario();
+            $daoUsuario->Update($usuario,$rutas[2]);
+            $this->inicio();
+        } else {
+            $daoU = new DaoUsuario();
+            $rst = $daoU->Select($rutas[2]);
+
+            $rstGenero = $daoNivelParametro->FillComboBox("Genero");
+            $rstTipoU = $daoNivelParametro->FillComboBox("Nivel Usuario");
+            require("view/frmUsuario.php");
+        }
+    }
 
 
     public function index()

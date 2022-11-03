@@ -66,23 +66,41 @@ class DaoUsuario
     $tabla->execute();
   }
 
-  public function Update($usuario)
+  public function Update($usuario, $usuarioBefore)
   {
-    $sql = "UPDATE usuario SET contraseña=?,correo=?,fechacreacion=?,estado=? WHERE idusuario=?";
+    $sql = "UPDATE usuario u
+    JOIN persona p ON u.idPersonaUsuario = p.id
+    JOIN registro_usuario ru ON u.usuario = ru.usuario
+    SET p.nombres = ?, p.apellidos = ?, p.direccion = ?, p.telefono = ?,
+    p.correo = ?, p.estado = ?, p.idGenero = ?, u.usuario = ?, u.fechaCreacion = ?,
+    u.estado = ?, u.idNivelUsuario = ?, ru.correo = ?, ru.passw = ?, ru.estado = ?,
+    ru.usuario = ? WHERE u.usuario = ?";
     $tabla = $this->base->prepare($sql);
-    $tabla->bindValue(1, $usuario->getContraseña());
-    $tabla->bindValue(2, $usuario->getCorreo());
-    $tabla->bindValue(3, $usuario->getFechacreacion());
-    $tabla->bindValue(4, $usuario->getEstado());
-    $tabla->bindValue(5, $usuario->getIdusuario());
+    $tabla->bindValue(1, $usuario->getNombres());
+    $tabla->bindValue(2, $usuario->getApellidos());
+    $tabla->bindValue(3, $usuario->getDireccion());
+    $tabla->bindValue(4, $usuario->getTelefono());
+    $tabla->bindValue(5, $usuario->getCorreo());
+    $tabla->bindValue(6, $usuario->getEstado());
+    $tabla->bindValue(7, $usuario->getGenero());
+    $tabla->bindValue(8, $usuario->getUsuario());
+    $tabla->bindValue(9, $usuario->getFechaCreacion());
+    $tabla->bindValue(10, $usuario->getEstado());
+    $tabla->bindValue(11, $usuario->getTipoUsuario());
+    $tabla->bindValue(12, $usuario->getCorreo());
+    $tabla->bindValue(13, $usuario->getPassw());
+    $tabla->bindValue(14, $usuario->getEstado());
+    $tabla->bindValue(15, $usuario->getUsuario());
+    $tabla->bindValue(16, $usuarioBefore);
     $tabla->execute();
   }
   public function Delete($idusuario = 0)
   {
-    $sql = "DELETE FROM usuario WHERE idusuario=?;";
+    $sql = "DELETE usuario,persona
+    FROM usuario
+    JOIN persona ON usuario.idPersonaUsuario = persona.id WHERE usuario = ?";
     $tabla = $this->base->prepare($sql);
     $tabla->bindValue(1, $idusuario);
     $tabla->execute();
   }
-
 }
