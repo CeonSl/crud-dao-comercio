@@ -1,7 +1,7 @@
 <body class="bg-dark">
   <div class="container p-2 text-center">
     <div class="row justify-content-center">
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title text-center font-weight-bold">CRUD USUARIOS</h5>
@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title text-center font-weight-bold">CRUD CLIENTES</h5>
@@ -29,7 +29,7 @@
   </div>
   <div class="container p-2 text-center">
     <div class="row justify-content-center">
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title text-center font-weight-bold">CRUD VENTA</h5>
@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <div class="card">
           <div class="card-body ">
             <h5 class="card-title text-center font-weight-bold">CRUD ROPA</h5>
@@ -56,7 +56,7 @@
   </div>
   <div class="container p-2 text-center">
     <div class="row justify-content-center">
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title text-center font-weight-bold">CRUD ENVIO</h5>
@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-4 text-center">
+      <div class="col-sm-5">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title text-center font-weight-bold">CRUD PARAMETRO</h5>

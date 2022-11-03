@@ -1,6 +1,6 @@
 <body class="bg-dark">
 
-  <div class="jumbotron bg-dark col-lg-6 col-md-6 col-sm-6 float-md-center" style="margin: 20px; color: #fff;">
+  <div class="jumbotron bg-dark col-lg-10 col-md-10 col-sm-10 float-md-center" style="margin: 20px; color: #fff;">
     <h1>Listado de nivel de parametro</h1>
 
     <p>

@@ -4,10 +4,10 @@ $rutas = explode("/", ($_GET['cmd']));
 ?>
 
 <body class="bg-dark">
-  <div class="jumbotron bg-dark col-lg-6 col-md-6 col-sm-6 float-md-center" style="margin: 20px; color: #fff;">
+  <div class="jumbotron bg-dark col-lg-8 col-md-8 col-sm-8 float-md-center" style="margin: 20px; color: #fff;">
     <h1>Formulario de registro clientes</h1>
     <form <?php if (!isset($rutas[2])) { ?>action="<?php echo SERVERURL ?>registrar/cliente" <?php } else { ?>action="<?php echo SERVERURL ?>editar/cliente/<?= $rutas[2] ?>" <?php } ?>method="post">
-      <fieldset style="width:300px ;">
+      <fieldset style="width:50% ;">
         <legend>Datos Personales</legend>
         <?php if (isset($rutas[2])) { ?>
           <div class="form-group">
