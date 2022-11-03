@@ -56,4 +56,35 @@ class DaoNParametro
     $tabla->bindValue(1, $idnparametro);
     $tabla->execute();
   }
+
+  public function FindIdType($tipo)
+  {
+    $sql = "SELECT id FROM nivel_parametro WHERE descripcion = ?;";
+    $tabla = $this->base->prepare($sql);
+    $tabla->bindParam(1, $tipo);
+    $tabla->execute();
+    $resultado = $tabla->fetch(PDO::FETCH_OBJ);
+    return $resultado;
+  }
+
+
+
+  public function FillComboBox($tipo)
+  {
+    $sql = "SELECT id,descripcion FROM nivel_parametro WHERE tipo = '$tipo';";
+    $tabla = $this->base->query($sql);
+    $tabla->execute();
+    $resultado = $tabla->fetchAll(PDO::FETCH_OBJ);
+    return $resultado;
+  }
+
+  public function FindIdComboBox($tipo)
+  {
+    $sql = "SELECT id FROM nivel_parametro WHERE descripcion = '$tipo';";
+    $tabla = $this->base->query($sql);
+    $tabla->execute();
+    $resultado = $tabla->fetch(PDO::FETCH_OBJ);
+    return $resultado;
+  }
+
 }

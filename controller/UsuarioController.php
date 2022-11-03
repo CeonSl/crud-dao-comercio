@@ -2,7 +2,7 @@
 
 require_once("model/usuario/entidad/Usuario.php");
 require_once("model/usuario/dao/DaoUsuario.php");
-require_once("model/cliente/dao/DaoCliente.php");
+require_once("model/nivel_parametro/dao/DaoNParametro.php");
 
 class UsuarioController
 {
@@ -13,18 +13,17 @@ class UsuarioController
     }
     public function registrar()
     {
-
+        $daoNivelParametro = new DaoNParametro();
         if (isset($_POST["txtNombres"])) {
+            
             $usuario = new Usuario();
-            $daoCliente = new DaoCliente();
-            $daoUsuario = new DaoUsuario();
 
             $usuario->setNombres($_POST["txtNombres"]);
             $usuario->setApellidos($_POST["txtApellidos"]);
 
-            $rst = $daoCliente->FindIdGenre($_POST["txtGenero"]);
-
+            $rst = $daoNivelParametro->FindIdComboBox($_POST["txtGenero"]);
             $usuario->setGenero($rst->id);
+
             $usuario->setDireccion($_POST["txtDireccion"]);
             $usuario->setTelefono($_POST["txtTelefono"]);
             $usuario->setCorreo($_POST["txtCorreo"]);
@@ -32,19 +31,18 @@ class UsuarioController
             $usuario->setPassw($_POST["txtContraseña"]);
             $usuario->setFechaCreacion($_POST["txtFechaCreacion"]);
 
-            $rstTipo = $daoUsuario->FindIdType($_POST["txtTipoUsuario"]);
-            
+            $rstTipo = $daoNivelParametro->FindIdType($_POST["txtTipoUsuario"]);
             $usuario->setTipoUsuario($rstTipo->id);
+
             $usuario->setEstado($_POST["txtEstado"]);
 
-            
+            $daoUsuario = new DaoUsuario();
             $daoUsuario->Insert($usuario);
             $this->inicio();
         } else {
-            $daoCliente = new DaoCliente();
-            $rstG = $daoCliente->FillGenre();
+            $rstG = $daoNivelParametro->FillComboBox("Genero");
             $daoUsuario = new DaoUsuario();
-            $rstTipoU = $daoUsuario->FillType();
+            $rstTipoU = $daoNivelParametro->FillComboBox("Nivel Usuario");
             require("view/frmUsuario.php");
         }
     }

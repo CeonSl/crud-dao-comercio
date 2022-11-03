@@ -2,7 +2,7 @@
 
 require_once("model/cliente/entidad/Cliente.php");
 require_once("model/cliente/dao/DaoCliente.php");
-require_once("model/genero/DaoGenero.php");
+require_once("model/nivel_parametro/dao/DaoNParametro.php");
 
 class ClienteController
 {
@@ -14,6 +14,7 @@ class ClienteController
     public function registrar()
     {
 
+        $daoNivelParametro = new DaoNParametro();
         if (isset($_POST["txtNombres"])) {
             
             $cliente = new Cliente();
@@ -24,16 +25,14 @@ class ClienteController
             $cliente->setCorreo($_POST["txtCorreo"]);
             $cliente->setEstado($_POST["txtEstado"]);
 
-            $daoGenero = new DaoGenero();
-            $rst = $daoGenero->FindIdGenre($_POST["txtGenero"]);
+            $rst = $daoNivelParametro->FindIdComboBox($_POST["txtGenero"]);
             $cliente->setGenero($rst->id);
 
             $daoCliente = new DaoCliente();
             $daoCliente->Insert($cliente);
             $this->inicio();
         } else {
-            $daoGenero = new DaoGenero();
-            $rst = $daoGenero->FillGenre("Genero");
+            $rst = $daoNivelParametro->FillComboBox("Genero");
             require("view/frmCliente.php");
         }
     }
@@ -52,6 +51,7 @@ class ClienteController
 
     public function editar()
     {
+        $daoNivelParametro = new DaoNParametro();
         $rutas = explode("/", $_GET["cmd"]);
         if (isset($rutas[2]) && isset($_POST["txtNombres"])) {
             $id = $rutas[2];
@@ -64,8 +64,7 @@ class ClienteController
             $cliente->setCorreo($_POST["txtCorreo"]);
             $cliente->setEstado($_POST["txtEstado"]);
 
-            $daoGenero = new DaoGenero();
-            $rst = $daoGenero->FindIdGenre($_POST["txtGenero"]);
+            $rst = $daoNivelParametro->FindIdComboBox($_POST["txtGenero"]);
             $cliente->setGenero($rst->id);
 
             $cliente->setIdcliente($id);
@@ -77,8 +76,7 @@ class ClienteController
             $daoC = new DaoCliente();
             $rst = $daoC->Select($rutas[2]);
 
-            $daoGenero = new DaoGenero();
-            $rstGenero = $daoGenero->FillGenre("Genero");
+            $rstGenero = $daoNivelParametro->FillComboBox("Genero");
             require("view/frmCliente.php");
         }
     }

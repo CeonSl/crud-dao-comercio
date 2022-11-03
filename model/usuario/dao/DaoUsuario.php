@@ -85,22 +85,4 @@ class DaoUsuario
     $tabla->execute();
   }
 
-  public function FillType()
-  {
-    $sql = "SELECT id,descripcion FROM nivel_parametro WHERE tipo = 'Nivel Usuario';";
-    $tabla = $this->base->query($sql);
-    $tabla->execute();
-    $resultado = $tabla->fetchAll(PDO::FETCH_OBJ);
-    return $resultado;
-  }
-
-  public function FindIdType($tipo)
-  {
-    $sql = "SELECT id FROM nivel_parametro WHERE descripcion = ?;";
-    $tabla = $this->base->prepare($sql);
-    $tabla->bindParam(1, $tipo);
-    $tabla->execute();
-    $resultado = $tabla->fetch(PDO::FETCH_OBJ);
-    return $resultado;
-  }
 }
