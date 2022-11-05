@@ -76,10 +76,7 @@ include ("includes/header.php");
         } else if ($rutas[0] == "inicio" && $rutas[1] == $tablas[$i]) {
             $controllers[$i]->inicio();
             break;
-        } else if ($rutas[0] == "eliminar" && $rutas[1] == $tablas[$i]) {
-            $controllers[$i]->eliminar();
-            break;
-        } else {
+        }else {
             if ($i >= 5) {
                 $controllerCliente->index();
                 break;

@@ -3,21 +3,35 @@
 class Ropa
 {
 
-  private $idropa;
+  private $id;
+  private $prenda;
   private $stock;
   private $precio;
   private $talla;
   private $estado;
   private $color;
+  private $imagen;
   
-  public function getIdropa()
+  public function getId()
   {
-    return $this->idropa;
+    return $this->id;
   }
 
-  public function setIdropa($idropa)
+  public function setId($id)
   {
-    $this->idropa = $idropa;
+    $this->id = $id;
+
+    return $this;
+  }
+
+  public function getPrenda()
+  {
+    return $this->prenda;
+  }
+
+  public function setPrenda($prenda)
+  {
+    $this->prenda = $prenda;
 
     return $this;
   }
@@ -78,6 +92,18 @@ class Ropa
   public function setColor($color)
   {
     $this->color = $color;
+
+    return $this;
+  }
+
+  public function getImagen()
+  {
+    return $this->imagen;
+  }
+
+  public function setImagen($imagen)
+  {
+    $this->imagen = $imagen;
 
     return $this;
   }

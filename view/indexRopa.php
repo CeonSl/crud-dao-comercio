@@ -11,6 +11,7 @@
     <table style="width:1200px ;" class="table table-hover rounded-bottom table-light">
       <tr>
         <th>Id</th>
+        <th>Prenda</th>
         <th>Stock</th>
         <th>Precio</th>
         <th>Talla</th>
@@ -23,15 +24,17 @@
 
       ?>
         <tr>
-          <td><?= $value->idropa ?></td>
+          <td><?= $value->id ?></td>
+          <td><?= $value->prenda?></td>
           <td><?= $value->stock ?></td>
           <td><?= $value->precio ?></td>
           <td><?= $value->talla ?></td>
           <td><?= $value->estado ?></td>
-          <td><?= $value->color ?></td>
+          <td><?= $value->descripcion ?></td>
+          <td><img style="height: 100px; width: 100px;" src="data:image/jpg;base64,<?= base64_encode($value->imagen)  ?>" alt=""></td>
           <td>
-            <a href="<?php echo SERVERURL ?>editar/ropa/<?= $value->idropa ?>" class="btn btn-primary">Editar </a>
-            <a href="<?php echo SERVERURL ?>eliminar/ropa/<?= $value->idropa ?>" class="btn btn-danger">Eliminar </a>
+            <a href="<?php echo SERVERURL ?>editar/ropa/<?= $value->id ?>" class="btn btn-primary">Editar </a>
+            <a href="<?php echo SERVERURL ?>eliminar/ropa/<?= $value->id ?>" class="btn btn-danger">Eliminar </a>
           </td>
         </tr>
       <?php

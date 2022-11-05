@@ -7,12 +7,17 @@ $rutas = explode("/", ($_GET['cmd']));
   <div class="jumbotron bg-dark col-lg-6 col-md-6 col-sm-6 float-md-center" style="margin: 20px; color: #fff;">
     <h1>Formulario de registro ropa</h1>
     <form <?php if (!isset($rutas[2])) { ?>action="<?php echo SERVERURL ?>registrar/ropa" <?php } else { ?>action="<?php echo SERVERURL ?>editar/ropa/<?= $rutas[2] ?>" <?php } ?>method="post">
-      <fieldset style="width:300px ;">
+      <fieldset style="width:350px ;">
         <legend>Datos</legend>
         <?php if (isset($rutas[2])) { ?>
           <div class="form-group">
             <label for="txtId">Id: </label>
             <input type="text" id="txtId" name="txtId" value="<?= $rutas[2] ?>" class="form-control" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="txtPrenda">Prenda: </label>
+            <input type="text" id="txtPrenda" name="txtPrenda" value="<?= $rst->prenda ?>" class="form-control" placeholder="Ingrese Prenda">
           </div>
 
           <div class="form-group">
@@ -37,12 +42,31 @@ $rutas = explode("/", ($_GET['cmd']));
 
           <div class="form-group">
             <label for="txtColor">Color: </label>
-            <input type="text" id="txtColor" name="txtColor" value="<?= $rst->color ?>" class="form-control" placeholder="Ingrese Color">
+            <select class="form-select" id="txtColor" name="txtColor">
+              <?php foreach ($rstColor as $key => $value) {
+                if (($rst->descripcion) == ($value->descripcion)) { ?>
+                  <option selected><?= $value->descripcion ?></option>
+                <?php } else { ?>
+                  <option><?= $value->descripcion ?></option>
+              <?php }
+              } ?>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="txtImagen">Imagen: </label>
+            <input type="file" id="txtImagen" name="txtImagen" value="" class="form-control" placeholder="Ingrese Imagen">
           </div>
 
         <?php
         } else {
         ?>
+
+          <div class="form-group">
+            <label for="txtPrenda">Prenda: </label>
+            <input type="text" id="txtPrenda" name="txtPrenda" value="" class="form-control" placeholder="Ingrese Prenda">
+          </div>
+
           <div class="form-group">
             <label for="txtStock">Stock: </label>
             <input type="text" id="txtStock" name="txtStock" value="" class="form-control" placeholder="Ingrese Stock">
@@ -65,8 +89,18 @@ $rutas = explode("/", ($_GET['cmd']));
 
           <div class="form-group">
             <label for="txtColor">Color: </label>
-            <input type="text" id="txtColor" name="txtColor" value="" class="form-control" placeholder="Ingrese Color">
+            <select class="form-select" id="txtColor" name="txtColor">
+              <?php foreach ($rst as $key => $value) { ?>
+                <option><?= $value->descripcion ?></option>
+              <?php } ?>
+            </select>
           </div>
+
+          <div class="form-group">
+            <label for="txtImagen">Imagen: </label>
+            <input type="file" id="txtImagen" name="txtImagen" class="form-control" >
+          </div>
+
         <?php
         }
         ?>
