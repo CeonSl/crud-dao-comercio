@@ -6,7 +6,7 @@ $rutas = explode("/", ($_GET['cmd']));
 <body class="bg-dark">
   <div class="jumbotron bg-dark col-lg-6 col-md-6 col-sm-6 float-md-center" style="margin: 20px; color: #fff;">
     <h1>Formulario de registro ropa</h1>
-    <form <?php if (!isset($rutas[2])) { ?>action="<?php echo SERVERURL ?>registrar/ropa" <?php } else { ?>action="<?php echo SERVERURL ?>editar/ropa/<?= $rutas[2] ?>" <?php } ?>method="post">
+    <form <?php if (!isset($rutas[2])) { ?>action="<?php echo SERVERURL ?>registrar/ropa" <?php } else { ?>action="<?php echo SERVERURL ?>editar/ropa/<?= $rutas[2] ?>" <?php } ?>method="post" enctype="multipart/form-data">
       <fieldset style="width:350px ;">
         <legend>Datos</legend>
         <?php if (isset($rutas[2])) { ?>
@@ -55,9 +55,12 @@ $rutas = explode("/", ($_GET['cmd']));
 
           <div class="form-group">
             <label for="txtImagen">Imagen: </label>
-            <input type="file" id="txtImagen" name="txtImagen" value="" class="form-control" placeholder="Ingrese Imagen">
+            <input type="file" id="txtImagen" name="txtImagen" class="form-control" placeholder="Ingrese Imagen" required>
           </div>
-
+          <div class="form-group">
+            <label>Imagen Actual:</label>
+            <img src="<?=SERVERURL?>view/img/<?=$rst->imagenRef?>" alt="" width="200px" height="200px">
+          </div>
         <?php
         } else {
         ?>
@@ -98,9 +101,17 @@ $rutas = explode("/", ($_GET['cmd']));
 
           <div class="form-group">
             <label for="txtImagen">Imagen: </label>
-            <input type="file" id="txtImagen" name="txtImagen" class="form-control" >
+            <input type="file" id="txtImagen" name="txtImagen" class="form-control">
           </div>
 
+          <div class="mb-2 col-md-10 px-0 ">
+            <?php if (isset($em)) : ?>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo $em ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php endif ?>
+          </div>
         <?php
         }
         ?>

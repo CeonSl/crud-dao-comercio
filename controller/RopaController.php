@@ -14,20 +14,48 @@ class RopaController
     public function registrar()
     {
         $daoNivelParametro = new DaoNParametro();
-        if (isset($_POST["txtStock"])) {
-            $ropa = new Ropa();
-            $ropa->setPrenda($_POST["txtPrenda"]);
-            $ropa->setStock($_POST["txtStock"]);
-            $ropa->setPrecio($_POST["txtPrecio"]);
-            $ropa->setTalla($_POST["txtTalla"]);
-            $ropa->setEstado($_POST["txtEstado"]);
+        if (isset($_POST["btnGuardar"]) && isset($_FILES['txtImagen'])) {
 
-            $rst = $daoNivelParametro->FindIdComboBox($_POST["txtColor"]);
-            $ropa->setColor($rst->id);
+            $nombreImagen = $_FILES['txtImagen']['name'];
+            $tamImagen = $_FILES['txtImagen']['size'];
+            $tmp_name = $_FILES['txtImagen']['tmp_name'];
+            $error = $_FILES['txtImagen']['error'];
 
-            $daoRopa = new DaoRopa();
-            $daoRopa->Insert($ropa);
-            $this->inicio();
+            if ($error === 0) {
+                if ($tamImagen > 125000) {
+
+                    $rst = $daoNivelParametro->FillComboBox("Color");
+                    $em = "Tu archivo es muy grande.";
+                    require("view/frmRopa.php");
+                } else {
+
+                    $imagen_extension = pathinfo($nombreImagen, PATHINFO_EXTENSION);
+                    $imagen_extension_lc = strtolower($imagen_extension);
+
+                    $imagenPermitida = array('png', 'jpg', 'jpeg', 'webp');
+
+                    if (in_array($imagen_extension, $imagenPermitida)) {
+                        $nombreNuevaImagen = uniqid('img', true) . "." . $imagen_extension_lc;
+                        $imagen_subida = "view/img/" . $nombreNuevaImagen;
+                        move_uploaded_file($tmp_name, $imagen_subida);
+                        //INSERTAR DATOS
+                        $ropa = new Ropa();
+                        $ropa->setPrenda($_POST["txtPrenda"]);
+                        $ropa->setStock($_POST["txtStock"]);
+                        $ropa->setPrecio($_POST["txtPrecio"]);
+                        $ropa->setTalla($_POST["txtTalla"]);
+                        $ropa->setEstado($_POST["txtEstado"]);
+                        $ropa->setImagen($nombreNuevaImagen);
+
+                        $rst = $daoNivelParametro->FindIdComboBox($_POST["txtColor"]);
+                        $ropa->setColor($rst->id);
+
+                        $daoRopa = new DaoRopa();
+                        $daoRopa->Insert($ropa);
+                        $this->inicio();
+                    }
+                }
+            }
         } else {
             $rst = $daoNivelParametro->FillComboBox("Color");
             require("view/frmRopa.php");
@@ -50,24 +78,52 @@ class RopaController
     {
         $daoNivelParametro = new DaoNParametro();
         $rutas = explode("/", $_GET["cmd"]);
-        if (isset($rutas[2]) && isset($_POST["txtStock"])) {
-            $id = $rutas[2];
-            $ropa = new Ropa();
-            $ropa->setId($id);
-            $ropa->setPrenda($_POST["txtPrenda"]);
-            $ropa->setStock($_POST["txtStock"]);
-            $ropa->setPrecio($_POST["txtPrecio"]);
-            $ropa->setTalla($_POST["txtTalla"]);
-            $ropa->setEstado($_POST["txtEstado"]);
+        if (isset($_POST["btnActualizar"]) && isset($_FILES['txtImagen']) && isset($rutas[2])) {
 
-            $rst = $daoNivelParametro->FindIdComboBox($_POST["txtColor"]);
-            $ropa->setColor($rst->id);
+            $nombreImagen = $_FILES['txtImagen']['name'];
+            $tamImagen = $_FILES['txtImagen']['size'];
+            $tmp_name = $_FILES['txtImagen']['tmp_name'];
+            $error = $_FILES['txtImagen']['error'];
 
-            $daoRopa = new DaoRopa();
-            $daoRopa->Update($ropa);
-            $this->inicio();
+            if ($error === 0) {
+                if ($tamImagen > 125000) {
+
+                    $rst = $daoNivelParametro->FillComboBox("Color");
+                    $em = "Tu archivo es muy grande.";
+                    require("view/frmRopa.php");
+                } else {
+
+                    $imagen_extension = pathinfo($nombreImagen, PATHINFO_EXTENSION);
+                    $imagen_extension_lc = strtolower($imagen_extension);
+
+                    $imagenPermitida = array('png', 'jpg', 'jpeg', 'webp');
+
+                    if (in_array($imagen_extension, $imagenPermitida)) {
+                        $nombreNuevaImagen = uniqid('img', true) . "." . $imagen_extension_lc;
+                        $imagen_subida = "view/img/" . $nombreNuevaImagen;
+                        move_uploaded_file($tmp_name, $imagen_subida);
+
+                        $id = $rutas[2];
+                        $ropa = new Ropa();
+                        $ropa->setId($id);
+                        $ropa->setPrenda($_POST["txtPrenda"]);
+                        $ropa->setStock($_POST["txtStock"]);
+                        $ropa->setPrecio($_POST["txtPrecio"]);
+                        $ropa->setTalla($_POST["txtTalla"]);
+                        $ropa->setEstado($_POST["txtEstado"]);
+                        $ropa->setImagen($nombreNuevaImagen);
+
+                        $rst = $daoNivelParametro->FindIdComboBox($_POST["txtColor"]);
+                        $ropa->setColor($rst->id);
+
+                        $daoRopa = new DaoRopa();
+                        $daoRopa->Update($ropa);
+                        $this->inicio();
+                    }
+                }
+            }
         } else {
-            
+
             $daoR = new DaoRopa();
             $rst = $daoR->Select($rutas[2]);
             $rstColor = $daoNivelParametro->FillComboBox("Color");

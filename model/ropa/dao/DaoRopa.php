@@ -47,6 +47,9 @@ class DaoRopa
 
   public function Update($ropa)
   {
+    $rst = $this->Select($ropa->getId());
+    $imagen = $rst->imagenRef;
+    unlink('C:/wamp64W11/www/crud-dao-comercio/view/img/'.$imagen);
     $sql = "UPDATE ropa SET stock=?, precio=?, talla=?, estado=?, idTipoColor=?, prenda=?, imagenRef=? WHERE id=?";
     $tabla = $this->base->prepare($sql);
     $tabla->bindValue(1, $ropa->getStock());
@@ -61,9 +64,21 @@ class DaoRopa
   }
   public function Delete($id = 0)
   {
-    $sql = "DELETE FROM ropa WHERE id=?;";
-    $tabla = $this->base->prepare($sql);
-    $tabla->bindValue(1, $id);
-    $tabla->execute();
+    $rst = $this->Select($id);
+    if(isset($rst)){
+      
+      $imagen = $rst->imagenRef;
+      unlink('C:/wamp64W11/www/crud-dao-comercio/view/img/'.$imagen);
+      $sql = "DELETE FROM ropa WHERE id=?;";
+      $tabla = $this->base->prepare($sql);
+      $tabla->bindValue(1, $id);
+      $tabla->execute();
+    }
+
+  }
+
+  public function DeleteImg($id)
+  {
+
   }
 }

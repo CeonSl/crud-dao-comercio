@@ -75,12 +75,12 @@
               <img class="col-md-6 offset-md-3 p-3" src="view/img/parametro.png" width="200px" alt="">
               <a href="<?php echo SERVERURL ?>inicio/nParametro" class="btn btn-warning ">Siguiente</a>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </body>
 
 </html>
